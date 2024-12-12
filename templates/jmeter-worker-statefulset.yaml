@@ -6,7 +6,7 @@ metadata:
     app: {{ .Release.Name }}-jmeter-worker
 spec:
   serviceName: {{ .Release.Name }}-jmeter-worker-headless # Headless service
-  replicas: {{ .Values.workers.replicaCount | default 3 }} # Number of JMeter workers
+  replicas: {{ .Values.workers.replicaCount | default "3" }} # Number of JMeter workers
   selector:
     matchLabels:
       app: {{ .Release.Name }}-jmeter-worker
