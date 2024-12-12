@@ -12,6 +12,8 @@ spec:
     - name: rmi
       port: 1099
       targetPort: 1099
+      protocol: TCP
     - name: communication
       port: 60000
       targetPort: 60000
+      protocol: TCP
