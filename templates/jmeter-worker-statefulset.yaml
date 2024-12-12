@@ -6,7 +6,7 @@ metadata:
     app: {{ .Release.Name }}-jmeter-worker
 spec:
   serviceName: {{ .Release.Name }}-jmeter-worker-headless # Headless service
-  replicas: {{ .Values.workers.replicaCount | default "3" }} # Number of JMeter workers
+  replicas: {{ .Values.Workers.replicaCount | default "3" }} # Number of JMeter workers
   selector:
     matchLabels:
       app: {{ .Release.Name }}-jmeter-worker
@@ -17,11 +17,11 @@ spec:
     spec:
       containers:
         - name: jmeter-worker
-          image: {{ .Values.workers.image | default "yethitech/performance-testing:latest" }}
+          image: {{ .Values.Workers.image | default "yethitech/performance-testing:latest" }}
           imagePullPolicy: Always
           env:
             - name: HEAP
-              value: {{ .Values.workers.heap | default "-Xms1g -Xmx4g" }}
+              value: {{ .Values.Workers.heap | default "-Xms1g -Xmx4g" }}
           ports:
             - containerPort: 1099 # JMeter RMI port
             - containerPort: 60000 # JMeter worker communication
@@ -39,5 +39,5 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: {{ .Values.workers.persistence.size | default "5Gi" }} # Size from values.yaml
-        storageClassName: {{ .Values.workers.persistence.storageClassName | default "standard" }} # Storage class from values.yaml
+            storage: {{ .Values.Workers.persistence.size | default "5Gi" }} # Size from values.yaml
+        storageClassName: {{ .Values.Workers.persistence.storageClassName | default "standard" }} # Storage class from values.yaml
