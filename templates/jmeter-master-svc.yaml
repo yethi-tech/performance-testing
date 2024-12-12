@@ -9,9 +9,9 @@ spec:
   selector:
     app: {{ .Release.Name }}-jmeter-master
   ports:
-  - name: rmi
-    port: 1099
-    targetPort: 1099
-  - name: communication
-    port: 60000
-    targetPort: 60000
+    - name: rmi
+      port: 1099
+      targetPort: 1099
+    - name: communication
+      port: 60000
+      targetPort: 60000
