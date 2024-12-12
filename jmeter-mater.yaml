@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jmeter-master
+  labels:
+    app: jmeter-master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jmeter-master
+  template:
+    metadata:
+      labels:
+        app: jmeter-master
+    spec:
+      containers:
+        - name: jmeter-master
+          image: vybhavkadam1/jmeter:latest
+          imagePullPolicy: Always
+          env:
+            - name: HEAP
+              value: "-Xms1g -Xmx1g"
+          ports:
+            - containerPort: 1099 # JMeter RMI port
+            - containerPort: 60000 # JMeter slave communication
+          volumeMounts:
+            - name: test-plan
+              mountPath: /test
+          args: ["-n", "-t", "/test/load-test.jmx",  "-R jmeter-slave.jmeter",  "-r", "-Dserver.rmi.ssl.disable=true"]
+      volumes:
+        - name: test-plan
+          configMap:
+            name: jmeter-config
