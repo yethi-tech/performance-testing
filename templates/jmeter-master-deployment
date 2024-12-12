@@ -16,7 +16,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: HEAP
-              value: {{ .Values.Master.heap | default '-Xms1g -Xmx4g' }}
+              value: {{ .Values.Master.heap | default "-Xms1g -Xmx4g" }}
           ports:
             - containerPort: 1099
             - containerPort: 60000
