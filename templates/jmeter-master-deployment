@@ -25,11 +25,11 @@ spec:
               mountPath: /csv  # Mounting CSV files from PVC
           resources:
             requests:
-              memory: {{ .Values.Master.resources.requests.memory | default '5Gi' }}
-              cpu: {{ .Values.Master.resources.requests.cpu | default '1' }}
+              memory: {{ .Values.Master.resources.requests.memory | default "5Gi" }}
+              cpu: {{ .Values.Master.resources.requests.cpu | default "1" }}
             limits:
-              memory: {{ .Values.Master.resources.limits.memory | default '5Gi' }}
-              cpu: {{ .Values.Master.resources.limits.cpu | default '3' }}
+              memory: {{ .Values.Master.resources.limits.memory | default "5Gi" }}
+              cpu: {{ .Values.Master.resources.limits.cpu | default "3" }}
           command:
             - /bin/sh
             - -c
