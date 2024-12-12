@@ -10,6 +10,7 @@ spec:
       labels:
         app: {{ .Release.Name }}-jmeter-master
     spec:
+      restartPolicy: Never  # Required field
       containers:
         - name: jmeter-master
           image: {{ .Values.Master.image | default "yethitech/performance-testing:kube" }}

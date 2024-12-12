@@ -17,7 +17,7 @@ spec:
       containers:
         - name: grafana
           image: {{ .Values.Grafana.image | default "grafana/grafana:latest" }}
-          imagePullPolicy: always
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           env:
