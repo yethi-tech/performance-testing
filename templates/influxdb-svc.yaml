@@ -7,7 +7,6 @@ metadata:
 spec:
   type: {{ .Values.InfluxDB.service.type | default "ClusterIP" }} # Allows flexibility for service type (ClusterIP, NodePort, LoadBalancer)
   ports:
-    - port: {{ .Values.InfluxDB.service.port | default 8086 }} # External port
       targetPort: 8086 # Target container port
       protocol: TCP
   selector:
