@@ -15,6 +15,8 @@ Master:
     limits:
       memory: "5Gi" # Memory limit for JMeter master
       cpu: "3" # CPU limit for JMeter master
+  service:
+    type: ClusterIP
   persistence:
     size: "5Gi" # Size for PVC
     storageClassName: "standard" # Storage class for PVC
@@ -35,5 +37,7 @@ InfluxDB:
   bucket: "jmeter" # Bucket name for storing data
   retention: "30d" # Data retention period
   persistence:
-  size: "10Gi"
-  storageClassName: "standard"
+    size: "10Gi"
+    storageClassName: "standard"
+  service:
+    type: ClusterIP
