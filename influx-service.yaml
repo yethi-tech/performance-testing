@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb  # This is the name you'll use in the master
+  labels:
+    app: influxdb
+spec:
+  selector:
+    app: influxdb
+  ports:
+    - name: http
+      port: 8086
+      targetPort: 8086

@@ -1,0 +1,20 @@
+Workers:
+  replicaCount: 3 # Number of JMeter slave replicas
+  image: "yethitech/performance-testing:latest" # Docker image for JMeter slaves
+  heap: "-Xms1g -Xmx4g" # JVM heap size for JMeter slaves
+  persistence:
+    size: "5Gi" # Storage size for each slave replica
+    storageClassName: "standard" # Storage class for Persistent Volume Claims
+Master:
+  image: "yethitech/performance-testing:kube" # Docker image for JMeter master
+  heap: "-Xms1g -Xmx4g" # JVM heap size for JMeter master
+  resources:
+    requests:
+      memory: "5Gi" # Memory request for JMeter master
+      cpu: "1" # CPU request for JMeter master
+    limits:
+      memory: "5Gi" # Memory limit for JMeter master
+      cpu: "3" # CPU limit for JMeter master
+  persistence:
+    size: "5Gi" # Size for PVC
+    storageClassName: "standard" # Storage class for PVC

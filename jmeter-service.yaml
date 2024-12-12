@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jmeter-master
+  labels:
+    app: jmeter-master
+spec:
+  type: ClusterIP
+  selector:
+    app: jmeter-master
+  ports:
+  - name: rmi
+    port: 1099
+    targetPort: 1099
+  - name: communication
+    port: 60000
+    targetPort: 60000

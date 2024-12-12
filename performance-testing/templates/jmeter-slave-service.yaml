@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-jmeter-slave-headless
+  labels:
+    app: {{ .Release.Name }}-jmeter-slave
+spec:
+  clusterIP: None  # Required for headless service
+  selector:
+    app: {{ .Release.Name }}-jmeter-slave
+  ports:
+    - name: rmi
+      port: 1099
+      targetPort: 1099
+    - name: communication
+      port: 60000
+      targetPort: 60000
