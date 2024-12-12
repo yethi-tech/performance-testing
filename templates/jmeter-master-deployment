@@ -8,7 +8,7 @@ spec:
   template:
     metadata:
       labels:
-        app: jmeter-master
+        app: {{ .Release.Name }}-jmeter-master
     spec:
       containers:
         - name: jmeter-master
