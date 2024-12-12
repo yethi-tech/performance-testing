@@ -33,7 +33,7 @@ spec:
           command:
             - /bin/sh
             - -c
-            args:
+          args:
               - |
                 set -x  # Enable shell debugging
 
