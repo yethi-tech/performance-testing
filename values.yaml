@@ -18,3 +18,22 @@ Master:
   persistence:
     size: "5Gi" # Size for PVC
     storageClassName: "standard" # Storage class for PVC
+Grafana:
+  username: admin # Grafana admin username
+  password: admin123 # Grafana admin password
+  service:
+    type: ClusterIP # Options: ClusterIP, NodePort, LoadBalancer
+    port: 3000 # External port for accessing Grafana
+  persistence:
+    enabled: true
+    size: 5Gi # Size of the persistent volume
+    storageClassName: standard # Storage class for PVC
+InfluxDB:
+  username: "admin" # InfluxDB admin username
+  password: "Admin" # InfluxDB admin password
+  org: "jmeter" # Organization name for InfluxDB
+  bucket: "jmeter" # Bucket name for storing data
+  retention: "30d" # Data retention period
+  persistence:
+  size: "10Gi"
+  storageClassName: "standard"
