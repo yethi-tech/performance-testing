@@ -5,9 +5,9 @@ metadata:
   labels:
     app: {{ .Release.Name }}-jmeter-master
 spec:
-  type: {{.Values.jmeter-master.service.type }}  
+  type: {{.Values.Master.service.type }}  
   selector:
-    app: jmeter-master
+    app: {{ .Release.Name }}-jmeter-master
   ports:
   - name: rmi
     port: 1099
