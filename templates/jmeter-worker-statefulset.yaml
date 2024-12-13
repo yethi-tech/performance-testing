@@ -31,7 +31,7 @@ spec:
           args: ["-s", "-Dserver.rmi.ssl.disable=true"]
   volumeClaimTemplates:
     - metadata:
-        name: 
+        name: {{ .Release.Name }}-jmeter-worker
         labels:
           app: {{ .Release.Name }}-jmeter-worker
       spec:
