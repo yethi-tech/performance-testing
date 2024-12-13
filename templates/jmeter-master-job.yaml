@@ -45,7 +45,7 @@ spec:
 
               i=0
               while [ $i -le $MAX_RETRIES ]; do
-                SLAVE_IPS=$(kubectl get pods -l 'app in (jmeter-slave,jmeter-slave1,jmeter-slave2)' -o jsonpath='{.items[*].status.podIP}' | tr ' ' ',')
+                SLAVE_IPS=$(kubectl get pods -l app={{ .Release.Name }}-jmeter-worker -o jsonpath='{.items[*].status.podIP}' | tr ' ' ',')
                 
                 if [ -n "$SLAVE_IPS" ]; then
                   echo "Slave IPs found: $SLAVE_IPS"
