@@ -10,6 +10,7 @@ spec:
       labels:
         app: {{ .Release.Name }}-jmeter-master
     spec:
+      serviceAccountName: {{ .Release.Name }}-jmeter-master-sa
       restartPolicy: Never  # Required field
       containers:
         - name: jmeter-master
