@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: {{ .Release.Name }}-jmeter-worker
   labels:
-    app: {{ .Release.Name }}-jmeter-worker
+    name: {{ .Release.Name }}-jmeter-worker
 spec:
   serviceName: {{ .Release.Name }}-jmeter-worker-headless # Headless service
   replicas: {{ .Values.Workers.replicaCount | default "3" }} # Number of JMeter workers

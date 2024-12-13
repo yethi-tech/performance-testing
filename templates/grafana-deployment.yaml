@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-grafana
   labels:
-    app: {{ .Release.Name }}-grafana
+    name: {{ .Release.Name }}-grafana
 spec:
   replicas: 1
   selector:
