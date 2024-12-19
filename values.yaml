@@ -32,7 +32,7 @@ Grafana:
     storageClassName: standard # Storage class for PVC
 InfluxDB:
   username: "admin" # InfluxDB admin username
-  password: "Admin" # InfluxDB admin password
+  password: "Admin@123" # InfluxDB admin password
   org: "jmeter" # Organization name for InfluxDB
   bucket: "jmeter" # Bucket name for storing data
   retention: "30d" # Data retention period
