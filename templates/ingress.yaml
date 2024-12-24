@@ -8,6 +8,8 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     {{- if .Values.ingress.annotations }}
       {{- toYaml .Values.ingress.annotations | nindent 4 }}
+      {{- else }}
+      # No annotations provided
     {{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.ingressClassName }}
