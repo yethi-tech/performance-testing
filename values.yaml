@@ -43,20 +43,26 @@ InfluxDB:
     type: ClusterIP
 ingress:
   enabled: true
-  ingressClassName: "nginx"  # Replace with your ingress class name
+  ingressClassName: "nginx"
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
   services:
-    - host: ""  # No hostname, catch-all traffic
+    - host: "192.168.17.101"  # Specific IP for service1
       paths:
         - path: /
           pathType: Prefix
-          serviceName: grafana
+          serviceName: service1
           servicePort: 3000
-    - host: ""  # No hostname, catch-all traffic
+    - host: "192.168.1.101"  # Specific IP for service2
       paths:
-        - path: /influxdb
+        - path: /service2
           pathType: Prefix
-          serviceName: influxdb
+          serviceName: service2
           servicePort: 8086
+    - host: "192.168.1.102"  # Specific IP for service3
+      paths:
+        - path: /service3
+          pathType: Prefix
+          serviceName: service3
+          servicePort: 9090
   tls: []
