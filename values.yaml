@@ -41,3 +41,22 @@ InfluxDB:
     storageClassName: "standard"
   service:
     type: ClusterIP
+ingress:
+  enabled: true
+  ingressClassName: "nginx"  # Replace with your ingress class name
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  services:
+    - host: ""  # No hostname, catch-all traffic
+      paths:
+        - path: /
+          pathType: Prefix
+          serviceName: grafana
+          servicePort: 3000
+    - host: ""  # No hostname, catch-all traffic
+      paths:
+        - path: /influxdb
+          pathType: Prefix
+          serviceName: influxdb
+          servicePort: 8086
+  tls: []
