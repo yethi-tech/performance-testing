@@ -7,21 +7,21 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     {{- if .Values.ingress.annotations }}
-    {{- toYaml .Values.ingress.annotations | nindent 4 }}
+      {{- toYaml .Values.ingress.annotations | nindent 4 }}
     {{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.ingressClassName }}
   rules:
   {{- range .Values.ingress.services }}
-  - host: {{ .host | default "" }}  # Match all IP traffic
+  - host: {{ .host | default "" }}  # Use default if no host is defined (match all traffic)
     http:
       paths:
       {{- range .paths }}
       - path: {{ .path }}
-        pathType: {{ .pathType }}
+        pathType: {{ .pathType | default "Prefix" }}  # Default to "Prefix" if pathType is not defined
         backend:
           service:
-            name: {{ .Release.Name.serviceName }}
+            name: {{ .serviceName }}
             port:
               number: {{ .servicePort }}
       {{- end }}
