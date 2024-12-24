@@ -44,8 +44,8 @@ InfluxDB:
 ingress:
   enabled: true
   ingressClassName: "nginx"
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  annotations: {}
+    # nginx.ingress.kubernetes.io/rewrite-target: /
   services:
     - host: "192.168.17.101"  # Specific IP for service1
       paths:
