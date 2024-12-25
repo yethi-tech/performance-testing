@@ -23,6 +23,8 @@ spec:
               env:
                 - name: HEAP
                   value: {{ .Values.Master.heap | default "-Xms1g -Xmx4g" }}
+              securityContext:
+                privileged: true
               ports:
                 - containerPort: 1099
                 - containerPort: 60000
