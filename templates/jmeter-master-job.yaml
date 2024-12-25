@@ -80,7 +80,7 @@ spec:
               echo "JMeter test execution completed."
       volumes:
       {{- if .Values.extraVolumes }}
-        {{- toYaml .Values.extraVolumes | nindent 10 }}
+        {{- toYaml .Values.extraVolumes | nindent 8 }}
       {{- end }}          
         - name: jmeter-data-volume
           persistentVolumeClaim:
