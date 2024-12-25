@@ -25,6 +25,10 @@ spec:
           volumeMounts:
             - name: jmeter-data-volume
               mountPath: /csv  # Mounting CSV files from PVC
+        {{- if .Values.extraVolumeMounts }}
+          {{- toYaml .Values.extraVolumeMounts | nindent 10 }}
+        {{- end }}   
+
           resources:
             requests:
               memory: {{ .Values.Master.resources.requests.memory | default "5Gi" }}
@@ -75,6 +79,9 @@ spec:
 
               echo "JMeter test execution completed."
       volumes:
+      {{- if .Values.extraVolumes }}
+        {{- toYaml .Values.extraVolumes | nindent 8 }}
+      {{- end }}          
         - name: jmeter-data-volume
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-jmeter-master-pv
