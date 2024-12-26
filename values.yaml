@@ -41,3 +41,5 @@ InfluxDB:
     storageClassName: "standard"
   service:
     type: ClusterIP
+extraVolumes: []
+extraVolumeMounts: []
