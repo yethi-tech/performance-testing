@@ -43,25 +43,29 @@ InfluxDB:
     type: ClusterIP
 ingress:
   enabled: true
-  ingressClassName: "nginx"
-  annotations: {}
+  className: nginx
   services:
-    - host: "192.168.17.101"  # Specific IP for service1
+    - host: "service1.example.com"
       paths:
         - path: /
           pathType: Prefix
           serviceName: service1
-          servicePort: 3000
-    - host: "192.168.1.101"  # Specific IP for service2
+          servicePort: 8080
+    - host: "service2.example.com"
       paths:
-        - path: /service2
+        - path: /api
           pathType: Prefix
           serviceName: service2
-          servicePort: 8086
-    - host: "192.168.1.102"  # Specific IP for service3
+          servicePort: 9090
+    - host: "service3.example.com"
       paths:
-        - path: /service3
+        - path: /metrics
           pathType: Prefix
           serviceName: service3
-          servicePort: 9090
-  tls: []
+          servicePort: 3000
+  tls:
+    - hosts:
+        - "service1.example.com"
+        - "service2.example.com"
+        - "service3.example.com"
+      secretName: ingress-tls-secret
