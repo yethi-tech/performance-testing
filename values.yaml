@@ -41,6 +41,7 @@ InfluxDB:
     storageClassName: "standard"
   service:
     type: ClusterIP
+<<<<<<< HEAD
 ingress:
   enabled: true
   className: nginx
@@ -69,3 +70,7 @@ ingress:
         - "service2.example.com"
         - "service3.example.com"
       secretName: ingress-tls-secret
+=======
+extraVolumes: []
+extraVolumeMounts: []
+>>>>>>> origin/main

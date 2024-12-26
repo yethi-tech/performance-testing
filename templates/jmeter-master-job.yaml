@@ -5,7 +5,12 @@ metadata:
   labels:
     name: {{ .Release.Name }}-jmeter-master
 spec:
+<<<<<<< HEAD
   schedule: "0 0 1 1 *"  # Trigger once a year on January 1st at midnight
+=======
+  schedule: "5 5 5 5 5" # Adjust the schedule as needed
+  suspend: true
+>>>>>>> origin/main
   jobTemplate:
     spec:
       template:
@@ -22,12 +27,25 @@ spec:
               env:
                 - name: HEAP
                   value: {{ .Values.Master.heap | default "-Xms1g -Xmx4g" }}
+<<<<<<< HEAD
+=======
+              securityContext:
+                privileged: true
+>>>>>>> origin/main
               ports:
                 - containerPort: 1099
                 - containerPort: 60000
               volumeMounts:
                 - name: jmeter-data-volume
+<<<<<<< HEAD
                   mountPath: /csv
+=======
+                  mountPath: /csv  # Mounting CSV files from PVC
+              {{- if .Values.extraVolumeMounts }}
+              {{- toYaml .Values.extraVolumeMounts | nindent 16 }}
+              {{- end }}
+
+>>>>>>> origin/main
               resources:
                 requests:
                   memory: {{ .Values.Master.resources.requests.memory | default "5Gi" }}
@@ -41,14 +59,25 @@ spec:
               args:
                 - |
                   set -x  # Enable shell debugging
+<<<<<<< HEAD
                   # Retry mechanism to fetch IPs of all JMeter slave pods
                   MAX_RETRIES=2
                   RETRY_DELAY=5
+=======
+
+                  # Retry mechanism to fetch IPs of all JMeter slave pods
+                  MAX_RETRIES=2  # Number of retries
+                  RETRY_DELAY=5  # Delay in seconds between retries
+>>>>>>> origin/main
 
                   i=0
                   while [ $i -le $MAX_RETRIES ]; do
                     SLAVE_IPS=$(kubectl get pods -l app={{ .Release.Name }}-jmeter-worker -o jsonpath='{.items[*].status.podIP}' | tr ' ' ',')
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> origin/main
                     if [ -n "$SLAVE_IPS" ]; then
                       echo "Slave IPs found: $SLAVE_IPS"
                       break
@@ -64,7 +93,11 @@ spec:
                     exit 1
                   fi
 
+<<<<<<< HEAD
                   # Run JMeter
+=======
+                  # Run JMeter across all slaves simultaneously
+>>>>>>> origin/main
                   jmeter -n -t /csv/Tenjin.jmx \
                     -R $SLAVE_IPS \
                     -r \
@@ -77,6 +110,12 @@ spec:
 
                   echo "JMeter test execution completed."
           volumes:
+<<<<<<< HEAD
+=======
+            {{- if .Values.extraVolumes }}
+            {{- toYaml .Values.extraVolumes | nindent 12 }}
+            {{- end }}
+>>>>>>> origin/main
             - name: jmeter-data-volume
               persistentVolumeClaim:
                 claimName: {{ .Release.Name }}-jmeter-master-pv
