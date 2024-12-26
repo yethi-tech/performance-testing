@@ -42,6 +42,7 @@ InfluxDB:
   service:
     type: ClusterIP
 ingress:
+  enabled: true
   className: nginx
   services:
     - host: "service1.example.com"
