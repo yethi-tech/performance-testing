@@ -42,12 +42,6 @@ InfluxDB:
   service:
     type: ClusterIP
 ingress:
-  service:
-    type: ClusterIP
-    port: 3001
-    nodePort:
-    annotations: {}
-    enabled: true
   className: nginx
   services:
     - host: "service1.example.com"
