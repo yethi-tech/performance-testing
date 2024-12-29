@@ -19,6 +19,8 @@ spec:
         - name: jmeter-worker
           image: {{ .Values.Workers.image | default "yethitech/performance-testing:latest" }}
           imagePullPolicy: Always
+          securityContext:
+            privileged: true
           env:
             - name: HEAP
               value: {{ .Values.Workers.heap | default "-Xms1g -Xmx4g" }}
