@@ -28,7 +28,14 @@ spec:
           volumeMounts:
             - name: worker-data
               mountPath: /csv  # Mounting CSV files from PV
+              {{- if .Values.extraVolumeMounts }}
+              {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+              {{- end }}
           args: ["-s", "-Dserver.rmi.ssl.disable=true"]
+      volumes:
+        {{- if .Values.extraVolumes }}
+        {{- toYaml .Values.extraVolumes | nindent 8 }}
+        {{- end }}
   volumeClaimTemplates:
     - metadata:
         name: worker-data
