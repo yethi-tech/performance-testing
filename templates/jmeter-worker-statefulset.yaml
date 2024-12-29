@@ -24,6 +24,11 @@ spec:
           env:
             - name: HEAP
               value: {{ .Values.Workers.heap | default "-Xms1g -Xmx4g" }}
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
           ports:
             - containerPort: 1099 # JMeter RMI port
             - containerPort: 60000 # JMeter worker communication
