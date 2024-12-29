@@ -19,16 +19,30 @@ spec:
         - name: jmeter-worker
           image: {{ .Values.Workers.image | default "yethitech/performance-testing:latest" }}
           imagePullPolicy: Always
+          securityContext:
+            privileged: true
           env:
             - name: HEAP
               value: {{ .Values.Workers.heap | default "-Xms1g -Xmx4g" }}
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
           ports:
             - containerPort: 1099 # JMeter RMI port
             - containerPort: 60000 # JMeter worker communication
           volumeMounts:
             - name: worker-data
               mountPath: /csv  # Mounting CSV files from PV
+              {{- if .Values.extraVolumeMounts }}
+              {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+              {{- end }}
           args: ["-s", "-Dserver.rmi.ssl.disable=true"]
+      volumes:
+        {{- if .Values.extraVolumes }}
+        {{- toYaml .Values.extraVolumes | nindent 8 }}
+        {{- end }}
   volumeClaimTemplates:
     - metadata:
         name: worker-data
