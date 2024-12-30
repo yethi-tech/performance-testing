@@ -45,29 +45,27 @@ ingress:
   enabled: true
   className: nginx
   services:
-    - host: "service1.example.com"
+    - host: "pt.uat.bankdhofar.com"
       paths:
         - path: /
           pathType: Prefix
-          serviceName: service1
-          servicePort: 8080
-    - host: "service2.example.com"
-      paths:
-        - path: /api
-          pathType: Prefix
-          serviceName: service2
-          servicePort: 9090
-    - host: "service3.example.com"
-      paths:
-        - path: /metrics
-          pathType: Prefix
-          serviceName: service3
+          serviceName: {{ .Release.Name }}-grafana
           servicePort: 3000
+    - host: "pt.uat.bankdhofar.com"
+      paths:
+        - path: /
+          pathType: Prefix
+          serviceName: {{ .Release.Name }}-influxdb
+          servicePort: 8086
+    - host: "pt.uat.bankdhofar.com"
+      paths:
+        - path: /
+          pathType: Prefix
+          serviceName: {{ .Release.Name }}-jmeter-vts
+          servicePort: 8080
   tls:
     - hosts:
-        - "service1.example.com"
-        - "service2.example.com"
-        - "service3.example.com"
+        - "pt.uat.bankdhofar.com"
       secretName: ingress-tls-secret
 
 extraVolumes: []
