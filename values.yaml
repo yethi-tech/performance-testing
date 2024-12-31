@@ -64,15 +64,15 @@ ingress:
           serviceName: {{ .Release.Name }}-jmeter-vts
           servicePort: 8080
   tls:
-              - hosts:
-                  - "pt-vts.uat.bankdhofar.com"
-                secretName: tls-uat-bankdhofar-com
-              - hosts:
-                  - "pt-grafana.uat.bankdhofar.com"
-                secretName: tls-uat-bankdhofar-com
-              - hosts:
-                  - "pt-influx.uat.bankdhofar.com"
-                secretName: tls-uat-bankdhofar-com
+    - hosts:
+      - "pt-vts.uat.bankdhofar.com"
+      secretName: tls-uat-bankdhofar-com
+    - hosts:
+      - "pt-grafana.uat.bankdhofar.com"
+      secretName: tls-uat-bankdhofar-com
+    - hosts:
+      - "pt-influx.uat.bankdhofar.com"
+      secretName: tls-uat-bankdhofar-com
 
 extraVolumes: []
 extraVolumeMounts: []
