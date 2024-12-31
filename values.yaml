@@ -45,28 +45,34 @@ ingress:
   enabled: true
   className: nginx
   services:
-    - host: "pt.uat.bankdhofar.com"
+    - host: "pt-grafana.uat.bankdhofar.com"
       paths:
         - path: /
           pathType: Prefix
           serviceName: {{ .Release.Name }}-grafana
           servicePort: 3000
-    - host: "pt.uat.bankdhofar.com"
+    - host: "pt-influx.uat.bankdhofar.com"
       paths:
         - path: /
           pathType: Prefix
           serviceName: {{ .Release.Name }}-influxdb
           servicePort: 8086
-    - host: "pt.uat.bankdhofar.com"
+    - host: "pt-vts.uat.bankdhofar.com"
       paths:
         - path: /
           pathType: Prefix
           serviceName: {{ .Release.Name }}-jmeter-vts
           servicePort: 8080
   tls:
-    - hosts:
-        - "pt.uat.bankdhofar.com"
-      secretName: ingress-tls-secret
+              - hosts:
+                  - "pt-vts.uat.bankdhofar.com"
+                secretName: tls-uat-bankdhofar-com
+              - hosts:
+                  - "pt-grafana.uat.bankdhofar.com"
+                secretName: tls-uat-bankdhofar-com
+              - hosts:
+                  - "pt-influx.uat.bankdhofar.com"
+                secretName: tls-uat-bankdhofar-com
 
 extraVolumes: []
 extraVolumeMounts: []
