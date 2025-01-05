@@ -49,29 +49,29 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
-          serviceName: "{{ .Release.Name }}-grafana"
+          serviceName: {{ .Release.Name }}-grafana
           servicePort: 3000
     - host: "pt-influx.uat.bankdhofar.com"
       paths:
         - path: /
           pathType: Prefix
-          serviceName: "{{ .Release.Name }}-influxdb"
+          serviceName: {{ .Release.Name }}-influxdb
           servicePort: 8086
     - host: "pt-vts.uat.bankdhofar.com"
       paths:
         - path: /
           pathType: Prefix
-          serviceName: "{{ .Release.Name }}-jmeter-vts"
+          serviceName: {{ .Release.Name }}-jmeter-vts
           servicePort: 8080
   tls:
     - hosts:
-      - "pt-vts.uat.bankdhofar.com"
+        - "pt-vts.uat.bankdhofar.com"
       secretName: tls-uat-bankdhofar-com
     - hosts:
-      - "pt-grafana.uat.bankdhofar.com"
+        - "pt-grafana.uat.bankdhofar.com"
       secretName: tls-uat-bankdhofar-com
     - hosts:
-      - "pt-influx.uat.bankdhofar.com"
+        - "pt-influx.uat.bankdhofar.com"
       secretName: tls-uat-bankdhofar-com
 
 extraVolumes: []
