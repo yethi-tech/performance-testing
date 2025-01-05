@@ -1,6 +1,7 @@
 Workers:
   replicaCount: 3 # Number of JMeter slave replicas
-  image: "yethitech/performance-testing:latest" # Docker image for JMeter slaves
+  image: "yethitech/performance-testing" # Docker image for JMeter slaves
+  imageTag: latest
   heap: "-Xms1g -Xmx4g" # JVM heap size for JMeter slaves
   persistence:
     size: "5Gi" # Storage size for each slave replica
