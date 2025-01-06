@@ -36,8 +36,8 @@ spec:
               volumeMounts:
                 - name: jmeter-data-volume
                   mountPath: /csv  # Mounting CSV files from PVC
-              {{- if .Values.extraVolumeMounts }}
-              {{- toYaml .Values.extraVolumeMounts | nindent 16 }}
+              {{- if .Values.Master.extraVolumeMounts }}
+              {{- toYaml .Values.Master.extraVolumeMounts | nindent 16 }}
               {{- end }}
 
               resources:
