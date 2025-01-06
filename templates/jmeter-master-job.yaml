@@ -34,8 +34,6 @@ spec:
                 - containerPort: 1099
                 - containerPort: 60000
               volumeMounts:
-                - name: jmeter-data-volume
-                  mountPath: /csv  # Mounting CSV files from PVC
               {{- if .Values.Master.extraVolumeMounts }}
               {{- toYaml .Values.Master.extraVolumeMounts | nindent 16 }}
               {{- end }}
@@ -92,21 +90,3 @@ spec:
             {{- if .Values.extraVolumes }}
             {{- toYaml .Values.extraVolumes | nindent 12 }}
             {{- end }}
-            - name: jmeter-data-volume
-              persistentVolumeClaim:
-                claimName: {{ .Release.Name }}-jmeter-master-pv
----
-# PersistentVolumeClaim definition (dynamic provisioning)
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ .Release.Name }}-jmeter-master-pv
-  labels:
-    app: {{ .Release.Name }}-jmeter-master
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: {{ .Values.Master.persistence.size | default "5Gi" }} 
-  storageClassName: {{ .Values.Master.persistence.storageClassName | default "standard" }}  
