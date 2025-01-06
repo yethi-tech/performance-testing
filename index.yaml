@@ -3,7 +3,17 @@ entries:
   performance-testing:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-01-06T12:31:19.1630905+05:30"
+    created: "2025-01-06T17:40:18.1441992+05:30"
+    description: A Helm chart for Kubernetes
+    digest: 69664fff3a0bdad83f117ac96e2ec1ba17be9c6e1d3cd7191e25c728fc4c417b
+    name: performance-testing
+    type: application
+    urls:
+    - https://yethi-tech.github.io/performance-testing/version-0.1.6/performance-testing-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-01-06T17:40:18.1368849+05:30"
     description: A Helm chart for Kubernetes
     digest: ff285fb191375bbc99795cee063a58b9e7ea7597b59e71e3508eefa99e8390cf
     name: performance-testing
@@ -13,7 +23,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-01-06T12:31:19.1605028+05:30"
+    created: "2025-01-06T17:40:18.1323829+05:30"
     description: A Helm chart for Kubernetes
     digest: 51305602a64b61d3bc35c6508b475a3dc88bbbf11f6a9bac839d25882573c33c
     name: performance-testing
@@ -23,7 +33,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-01-06T12:31:19.1578283+05:30"
+    created: "2025-01-06T17:40:18.1197617+05:30"
     description: A Helm chart for Kubernetes
     digest: 0602f3b961da4b2dcf48710900fda6f4f474be72524769c43e94cb7f77493238
     name: performance-testing
@@ -33,7 +43,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-01-06T12:31:19.1530986+05:30"
+    created: "2025-01-06T17:40:18.1157192+05:30"
     description: A Helm chart for Kubernetes
     digest: 4c2b882aa60141809f77c0226d749c0bcad17dddaa6e4fe02b4f89ffa0264a34
     name: performance-testing
@@ -43,7 +53,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-01-06T12:31:19.1510178+05:30"
+    created: "2025-01-06T17:40:18.1123575+05:30"
     description: A Helm chart for Kubernetes
     digest: 56c1126938952f96164b2e1725ba7a97cc6b7978e2baa17534a8aab71df31a97
     name: performance-testing
@@ -53,7 +63,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-01-06T12:31:19.1494545+05:30"
+    created: "2025-01-06T17:40:18.1084777+05:30"
     description: A Helm chart for Kubernetes
     digest: cf8c9ccb638867bcdbc140e605278884b2c52f496c993b2189b78e0a5f3de5e9
     name: performance-testing
@@ -61,4 +71,4 @@ entries:
     urls:
     - https://yethi-tech.github.io/performance-testing/performance-testing-0.1.0.tgz
     version: 0.1.0
-generated: "2025-01-06T12:31:19.1478893+05:30"
+generated: "2025-01-06T17:40:18.104629+05:30"
