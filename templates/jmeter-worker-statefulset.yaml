@@ -23,7 +23,7 @@ spec:
             privileged: true
           env:
             - name: HEAP
-              value: {{ .Values.Workers.heap | default "-Xms1g -Xmx4g" }}
+              value: {{ .Values.Workers.heap | default "-Xms1g -Xmx8g" }}
             - name: POD_NAME
               valueFrom:
                 fieldRef:
