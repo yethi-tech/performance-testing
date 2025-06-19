@@ -79,3 +79,4 @@ ingress:
 extraVolumes: []
 extraVolumeMounts: []
 extraManifests: []
+extraContainers: []
