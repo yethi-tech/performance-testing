@@ -15,6 +15,10 @@ spec:
       labels:
         app: {{ .Release.Name }}-jmeter-worker
     spec:
+      initContainers:
+        {{- if .Values.extraInitContainers }}
+        {{ toYaml .Values.extraInitContainers | nindent 8 }}
+        {{- end }}
       containers:
         - name: jmeter-worker
           image: "{{ .Values.Workers.image | default "yethitech/performance-testing" }}:{{ .Values.Workers.imageTag | default "3-2-25" }}"
