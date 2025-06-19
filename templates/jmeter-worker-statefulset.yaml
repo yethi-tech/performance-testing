@@ -37,6 +37,9 @@ spec:
               {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
               {{- end }}
           args: ["-s", "-Dserver.rmi.ssl.disable=true"]
+        {{- if .Values.extraContainers }}
+        {{- toYaml .Values.extraContainers | nindent 8 }}
+        {{- end }}
       volumes:
         {{- if .Values.extraVolumes }}
         {{- toYaml .Values.extraVolumes | nindent 8 }}
