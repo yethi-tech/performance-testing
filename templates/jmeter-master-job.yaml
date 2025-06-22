@@ -105,10 +105,7 @@ spec:
                     index=$((index + 1))
                   done 
                   echo "All JMeter tests completed."
-            {{- if .Values.extraContainers }}
-            {{- toYaml .Values.extraContainers | nindent 12 }}
-            {{- end }}
           volumes:
-            {{- if .Values.extraVolumes }}
-            {{- toYaml .Values.extraVolumes | nindent 12 }}
+            {{- if .Values.Master.extraVolumes }}
+            {{- toYaml .Values.Master.extraVolumes | nindent 12 }}
             {{- end }}
