@@ -3,6 +3,7 @@ Workers:
   image: "yethitech/performance-testing" # Docker image for JMeter slaves
   imageTag: 3-2-25
   heap: "-Xms1g -Xmx8g" # JVM heap size for JMeter slaves
+  csvFilePath: "/csv/deh/pt"
   persistence:
     size: "5Gi" # Storage size for each slave replica
     storageClassName: "standard" # Storage class for Persistent Volume Claims
