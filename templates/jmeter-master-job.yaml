@@ -37,7 +37,6 @@ spec:
               {{- if .Values.Master.extraVolumeMounts }}
               {{- toYaml .Values.Master.extraVolumeMounts | nindent 16 }}
               {{- end }}
-
               resources:
                 requests:
                   memory: {{ .Values.Master.resources.requests.memory | default "5Gi" }}
@@ -75,17 +74,21 @@ spec:
                   fi
 
                   # Run JMeter across all slaves simultaneously
-                  jmeter -n -t /csv/Tenjin.jmx \
+                  jmeter -n -t /csv/deh/pt/Tenjin.jmx \
                     -R $SLAVE_IPS \
                     -r \
                     -Dserver.rmi.ssl.disable=true \
                     -Jserver.rmi.localport=60000 \
                     -Jclient.rmi.localport=1099 \
-                    -e -o /csv/reports.html \
-                    -l /csv/results.jtl \
-                    -j /csv/results.log
+                    -e -o /csv/deh/pt/reports.html \
+                    -l /csv/deh/pt/results.jtl \
+                    -j /csv/deh/pt/results.log
 
                   echo "JMeter test execution completed."
+                              
+            {{- if .Values.extraContainers }}
+            {{- toYaml .Values.extraContainers | nindent 12 }}
+            {{- end }}
           volumes:
             {{- if .Values.extraVolumes }}
             {{- toYaml .Values.extraVolumes | nindent 12 }}

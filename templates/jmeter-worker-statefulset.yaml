@@ -40,7 +40,7 @@ spec:
               {{- if .Values.extraVolumeMounts }}
               {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
               {{- end }}
-          args: ["-s", "-Dserver.rmi.ssl.disable=true"]
+          args: ["-s", "-Dserver.rmi.ssl.disable=true", "-DCSV_FILE_PATH={{ .Values.Workers.csvFilePath | default "/csv"  }}/$(POD_NAME)"]
         {{- if .Values.extraContainers }}
         {{- toYaml .Values.extraContainers | nindent 8 }}
         {{- end }}
