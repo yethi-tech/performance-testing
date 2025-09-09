@@ -49,6 +49,9 @@ spec:
                 - -c
               args:
                 - |
+                  echo "waiting for s3 fs"
+                  sleep 30;
+                  echo "staring master job"
                   set -x  # Enable shell debugging
 
                   # Retry mechanism to fetch IPs of all JMeter slave pods
