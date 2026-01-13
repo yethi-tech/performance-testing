@@ -24,9 +24,9 @@ spec:
             - containerPort: 3000
           env:
             - name: GF_SECURITY_ADMIN_USER
-              value: {{ .Values.Grafana.username }}
+              value: {{ .Values.Grafana.grafuname }}
             - name: GF_SECURITY_ADMIN_PASSWORD
-              value: {{ .Values.Grafana.password }}
+              value: {{ .Values.Grafana.grafpass }}
             - name: GF_USERS_ALLOW_SIGN_UP
               value: "true" # Example of another environment variable
             - name: GF_SERVER_HTTP_PORT
