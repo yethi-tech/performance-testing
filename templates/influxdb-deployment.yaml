@@ -30,6 +30,8 @@ spec:
             - name: influxdb-storage
               mountPath: /var/lib/influxdb2
           envFrom:
+            - secretRef:
+                name: {{ .Release.Name }}-influxdb-secret
             - configMapRef:
                 name: {{ .Release.Name }}-influxdb-config
       volumes:

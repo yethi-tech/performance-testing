@@ -22,11 +22,10 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: {{ .Release.Name }}-grafana-secret
           env:
-            - name: GF_SECURITY_ADMIN_USER
-              value: {{ .Values.Grafana.grafuname }}
-            - name: GF_SECURITY_ADMIN_PASSWORD
-              value: {{ .Values.Grafana.grafpass }}
             - name: GF_USERS_ALLOW_SIGN_UP
               value: "true" # Example of another environment variable
             - name: GF_SERVER_HTTP_PORT

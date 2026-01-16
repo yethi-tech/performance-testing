@@ -6,8 +6,6 @@ metadata:
     app: {{ .Release.Name }}-influxdb
 data:
   DOCKER_INFLUXDB_INIT_MODE: "setup"
-  DOCKER_INFLUXDB_INIT_USERNAME: {{ .Values.InfluxDB.influxuname | quote }}
-  DOCKER_INFLUXDB_INIT_PASSWORD: {{ .Values.InfluxDB.influxpass | quote }}
   DOCKER_INFLUXDB_INIT_ORG: {{ .Values.InfluxDB.org | quote }}
   DOCKER_INFLUXDB_INIT_BUCKET: {{ .Values.InfluxDB.bucket | quote }}
   DOCKER_INFLUXDB_INIT_RETENTION: {{ .Values.InfluxDB.retention | quote }}
