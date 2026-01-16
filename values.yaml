@@ -1,0 +1,86 @@
+Workers:
+  replicaCount: 3 # Number of JMeter slave replicas
+  image: "yethitech/performance-testing" # Docker image for JMeter slaves
+  imageTag: 3-2-25
+  heap: "-Xms1g -Xmx8g" # JVM heap size for JMeter slaves
+  csvFilePath: "/csv/deh/pt"
+  persistence:
+    size: "5Gi" # Storage size for each slave replica
+    storageClassName: "standard" # Storage class for Persistent Volume Claims
+Master:
+  image: "yethitech/performance-testing" # Docker image for JMeter master
+  imageTag: kube-3-2-25 
+  heap: "-Xms1g -Xmx8g" # JVM heap size for JMeter master
+  resources:
+    requests:
+      memory: "5Gi" # Memory request for JMeter master
+      cpu: "1" # CPU request for JMeter master
+    limits:
+      memory: "5Gi" # Memory limit for JMeter master
+      cpu: "3" # CPU limit for JMeter master
+  service:
+    type: ClusterIP
+  persistence:
+    size: "5Gi" # Size for PVC
+    storageClassName: "standard" # Storage class for PVC
+Grafana:
+  image: "grafana/grafana:latest"
+  service:
+    type: ClusterIP # Options: ClusterIP, NodePort, LoadBalancer
+    port: 3000 # External port for accessing Grafana
+  persistence:
+    enabled: true
+    size: 5Gi # Size of the persistent volume
+    storageClassName: standard # Storage class for PVC
+InfluxDB:
+  image: "influxdb:2.7"
+  org: "jmeter" # Organization name for InfluxDB
+  bucket: "jmeter" # Bucket name for storing data
+  retention: "30d" # Data retention period
+  persistence:
+    size: "10Gi"
+    storageClassName: "standard"
+  service:
+    type: ClusterIP
+
+vts:
+  image: performancetesting/opentext_vts_linux_ubuntu:latest
+
+ingress:
+  enabled: true
+  className: nginx
+  services:
+    - host: "pt-grafana.uat.bankdhofar.com"
+      paths:
+        - path: /
+          pathType: Prefix
+          serviceName: "{{ .Release.Name }}-grafana"
+          servicePort: 3000
+    - host: "pt-influx.uat.bankdhofar.com"
+      paths:
+        - path: /
+          pathType: Prefix
+          serviceName: "{{ .Release.Name }}-influxdb"
+          servicePort: 8086
+    - host: "pt-vts.uat.bankdhofar.com"
+      paths:
+        - path: /
+          pathType: Prefix
+          serviceName: "{{ .Release.Name }}-jmeter-vts"
+          servicePort: 8080
+  tls:
+    - hosts:
+        - "pt-vts.uat.bankdhofar.com"
+      secretName: tls-uat-bankdhofar-com
+    - hosts:
+        - "pt-grafana.uat.bankdhofar.com"
+      secretName: tls-uat-bankdhofar-com
+    - hosts:
+        - "pt-influx.uat.bankdhofar.com"
+      secretName: tls-uat-bankdhofar-com
+
+extraVolumes: []
+extraVolumeMounts: []
+extraManifests: []
+extraContainers: []
+extraInitContainers: []
