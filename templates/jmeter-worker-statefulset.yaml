@@ -21,7 +21,7 @@ spec:
         {{- end }}
       containers:
         - name: jmeter-worker
-          image: "{{ .Values.Workers.image | default "yethitech/performance-testing" }}:{{ .Values.Workers.imageTag | default "3-2-25" }}"
+          image: "{{ .Values.Workers.image | default "yethitech/performance-testing" }}:{{ .Values.Workers.imageTag | default "6-3-26" }}"
           imagePullPolicy: Always
           securityContext:
             privileged: true
