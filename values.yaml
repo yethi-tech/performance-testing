@@ -84,3 +84,5 @@ extraVolumeMounts: []
 extraManifests: []
 extraContainers: []
 extraInitContainers: []
+
+namespace: uat-pt-env
