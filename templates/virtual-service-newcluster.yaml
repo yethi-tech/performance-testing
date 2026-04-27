@@ -1,0 +1,68 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: 
+  namespace: {{ .Values.namespace }}
+spec:
+  gateways:
+  - {{ .Values.gateway }}
+  hosts:
+  - {{ .Values.host.vts }}
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: pt-env-jmeter-vts
+        port:
+          number: 8080
+    retries:
+      attempts: 0
+    timeout: 30s
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: 
+  namespace: {{ .Values.namespace }}
+spec:
+  gateways:
+  - {{ .Values.gateway }}
+  hosts:
+  - {{ .Values.host.influx }}
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: pt-env-influxdb
+        port:
+          number: 8086
+    retries:
+      attempts: 0
+    timeout: 30s
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: 
+  namespace: {{ .Values.namespace }}
+spec:
+  gateways:
+  - {{ .Values.gateway }}
+  hosts:
+  - {{ .Values.host.grafana }}
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: pt-env-grafana
+        port:
+          number: 3000
+    retries:
+      attempts: 0
+    timeout: 30s

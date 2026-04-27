@@ -86,3 +86,9 @@ extraContainers: []
 extraInitContainers: []
 
 namespace: uat-pt-env
+
+gateway: istio-system/gw-stgd-bankdhofar-com
+host:
+  vts: pt-stg-vts.stgd.bankdhofar.com
+  influx: pt-stg-influx.stgd.bankdhofar.com
+  grafana: pt-stg-grafana.stgd.bankdhofar.com
