@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: jmeter-service-entry
+  namespace: {{.Values.namespace}}
+spec:
+  hosts:
+  - "*.local"
+  ports:
+  - number: 1099
+    name: tcp-rmi
+    protocol: TCP
+  - number: 60000
+    name: tcp-rmi-data
+    protocol: TCP
+  resolution: NONE
