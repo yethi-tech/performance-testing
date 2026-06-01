@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: pt-env-jmeter-vts-vs
+  name: {{ .Release.Name }}-jmeter-vts-vs
   namespace: {{ .Values.namespace }}
 spec:
   gateways:
@@ -14,7 +14,7 @@ spec:
         prefix: /
     route:
     - destination:
-        host: pt-env-jmeter-vts
+        host: {{ .Release.Name }}-jmeter-vts
         port:
           number: 8080
     retries:
@@ -24,7 +24,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: pt-env-influxdb-vs
+  name: {{ .Release.Name }}-influxdb-vs
   namespace: {{ .Values.namespace }}
 spec:
   gateways:
@@ -37,7 +37,7 @@ spec:
         prefix: /
     route:
     - destination:
-        host: pt-env-influxdb
+        host: {{ .Release.Name }}-influxdb
         port:
           number: 8086
     retries:
@@ -47,7 +47,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: pt-env-grafana-vs
+  name: {{ .Release.Name }}-grafana-vs
   namespace: {{ .Values.namespace }}
 spec:
   gateways:
@@ -60,7 +60,7 @@ spec:
         prefix: /
     route:
     - destination:
-        host: pt-env-grafana
+        host: {{ .Release.Name }}-grafana
         port:
           number: 3000
     retries:
