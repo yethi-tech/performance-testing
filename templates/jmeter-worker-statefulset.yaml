@@ -4,46 +4,67 @@ metadata:
   name: {{ .Release.Name }}-jmeter-worker
   labels:
     name: {{ .Release.Name }}-jmeter-worker
+
 spec:
   serviceName: {{ .Release.Name }}-jmeter-worker
   replicas: {{ .Values.Workers.replicaCount | default "3" }} # Number of JMeter workers
+
   selector:
     matchLabels:
       app: {{ .Release.Name }}-jmeter-worker
+
   template:
     metadata:
       labels:
         app: {{ .Release.Name }}-jmeter-worker
+
     spec:
+      hostAliases:
+        - ip: "10.141.218.208" # ClusterIP of svc/istio-ingressgateway in ns istio-system
+          hostnames:
+            - "islamic-channels.stgd.dhofarislamic.com"
+
       initContainers:
         {{- if .Values.extraInitContainers }}
         {{ toYaml .Values.extraInitContainers | nindent 8 }}
         {{- end }}
+
       containers:
         - name: jmeter-worker
           image: "{{ .Values.Workers.image | default "yethitech/performance-testing" }}:{{ .Values.Workers.imageTag | default "6-3-26" }}"
           imagePullPolicy: Always
+
           securityContext:
             privileged: true
+
           env:
             - name: HEAP
               value: {{ .Values.Workers.heap | default "-Xms1g -Xmx8g" }}
+
             - name: POD_NAME
               valueFrom:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: metadata.name
+
           ports:
             - containerPort: 1099 # JMeter RMI port
             - containerPort: 60000 # JMeter worker communication
+
           volumeMounts:
-              {{- if .Values.extraVolumeMounts }}
-              {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
-              {{- end }}
-          args: ["-s", "-Dserver.rmi.ssl.disable=true", "-DCSV_FILE_PATH={{ .Values.Workers.csvFilePath | default "/csv"  }}/$(POD_NAME)"]
+            {{- if .Values.extraVolumeMounts }}
+            {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+            {{- end }}
+
+          args:
+            - "-s"
+            - "-Dserver.rmi.ssl.disable=true"
+            - "-DCSV_FILE_PATH={{ .Values.Workers.csvFilePath | default "/csv" }}/$(POD_NAME)"
+
         {{- if .Values.extraContainers }}
         {{- toYaml .Values.extraContainers | nindent 8 }}
         {{- end }}
+
       volumes:
         {{- if .Values.extraVolumes }}
         {{- toYaml .Values.extraVolumes | nindent 8 }}

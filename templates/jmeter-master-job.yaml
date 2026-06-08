@@ -4,6 +4,7 @@ metadata:
   name: {{ .Release.Name }}-jmeter-master
   labels:
     name: {{ .Release.Name }}-jmeter-master
+
 spec:
   schedule: "5 5 5 5 5" # Adjust the schedule as needed
   suspend: true
@@ -16,6 +17,11 @@ spec:
             app: {{ .Release.Name }}-jmeter-master
 
         spec:
+          hostAliases:
+            - ip: "10.141.218.208" # ClusterIP of svc/istio-ingressgateway in ns istio-system
+              hostnames:
+                - "islamic-channels.stgd.dhofarislamic.com"
+
           serviceAccountName: {{ .Release.Name }}-jmeter-master-sa
           restartPolicy: Never
 
@@ -67,7 +73,6 @@ spec:
                   echo "starting master job"
                   set -x
 
-                  # Retry mechanism to fetch IPs of all JMeter slave pods
                   MAX_RETRIES=2
                   RETRY_DELAY=5
 
@@ -86,13 +91,11 @@ spec:
                     i=$((i+1))
                   done
 
-                  # Exit if no IPs are found
                   if [ -z "$SLAVE_IPS" ]; then
                     echo "No slave IPs found! Exiting..."
                     exit 1
                   fi
 
-                  # Run JMeter across all slaves simultaneously
                   jmeter -n \
                     -t {{ .Values.Workers.csvFilePath }}/Tenjin.jmx \
                     -R $SLAVE_IPS \
