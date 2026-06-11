@@ -9,9 +9,15 @@ metadata:
 spec:
   # Resolve the public hostname to the in-cluster Istio ingress gateway
   hostAliases:
-    - ip: "10.141.218.208" # ClusterIP of svc/istio-ingressgateway in ns istio-system
+    - ip: 10.141.218.208
       hostnames:
-        - "islamic-channels.stgd.dhofarislamic.com"
+        - islamic-channels.stgd.dhofarislamic.com
+    - ip: 10.141.218.208
+      hostnames:
+        - core.stgd.dhofarislamic.com
+    - ip: 10.141.218.208
+      hostnames:
+        - apihub.stgd.dhofarislamic.com
 
   containers:
     - name: netshoot
