@@ -18,9 +18,17 @@ spec:
 
         spec:
           hostAliases:
-            - ip: "10.141.218.208" # ClusterIP of svc/istio-ingressgateway in ns istio-system
-              hostnames:
-                - "islamic-channels.stgd.dhofarislamic.com"
+            - hostnames:
+                - islamic-channels.stgd.dhofarislamic.com
+              ip: 10.141.218.208
+
+            - hostnames:
+                - core.stgd.dhofarislamic.com
+              ip: 10.141.218.208
+
+            - hostnames:
+                - apihub.stgd.dhofarislamic.com
+              ip: 10.141.218.208
 
           serviceAccountName: {{ .Release.Name }}-jmeter-master-sa
           restartPolicy: Never
@@ -86,7 +94,6 @@ spec:
                     fi
 
                     echo "No slave IPs found. Retrying in $RETRY_DELAY seconds... (Attempt $((i+1)) of $((MAX_RETRIES+1)))"
-
                     sleep $RETRY_DELAY
                     i=$((i+1))
                   done
