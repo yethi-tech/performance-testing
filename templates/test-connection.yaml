@@ -9,14 +9,10 @@ metadata:
 spec:
   # Resolve the public hostname to the in-cluster Istio ingress gateway
   hostAliases:
-    - ip: 10.141.218.208
+    - ip: "10.141.218.208"
       hostnames:
         - islamic-channels.stgd.dhofarislamic.com
-    - ip: 10.141.218.208
-      hostnames:
         - core.stgd.dhofarislamic.com
-    - ip: 10.141.218.208
-      hostnames:
         - apihub.stgd.dhofarislamic.com
 
   containers:
