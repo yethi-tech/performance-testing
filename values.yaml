@@ -1,5 +1,5 @@
 Workers:
-  replicaCount: 3 # Number of JMeter slave replicas
+  replicaCount: 4 # Number of JMeter slave replicas
   image: "yethitech/performance-testing" # Docker image for JMeter slaves
   imageTag: 6-3-26
   heap: "-Xms1g -Xmx8g" # JVM heap size for JMeter slaves
