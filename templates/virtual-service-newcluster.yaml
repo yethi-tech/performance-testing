@@ -1,68 +1,74 @@
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
   name: {{ .Release.Name }}-jmeter-vts-vs
   namespace: {{ .Values.namespace }}
 spec:
-  gateways:
-  - {{ .Values.gateway }}
-  hosts:
-  - {{ .Values.host.vts }}
-  http:
-  - match:
-    - uri:
-        prefix: /
-    route:
-    - destination:
-        host: {{ .Release.Name }}-jmeter-vts
-        port:
-          number: 8080
-    retries:
-      attempts: 0
-    timeout: 30s
+  hostnames:
+    - {{ .Values.host.vts }}
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: ingressgateway
+      namespace: istio-ingress
+  rules:
+    - backendRefs:
+        - group: ''
+          kind: Service
+          name: {{ .Release.Name }}-jmeter-vts
+          port: 8080
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
 ---
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
   name: {{ .Release.Name }}-influxdb-vs
   namespace: {{ .Values.namespace }}
 spec:
-  gateways:
-  - {{ .Values.gateway }}
-  hosts:
-  - {{ .Values.host.influx }}
-  http:
-  - match:
-    - uri:
-        prefix: /
-    route:
-    - destination:
-        host: {{ .Release.Name }}-influxdb
-        port:
-          number: 8086
-    retries:
-      attempts: 0
-    timeout: 30s
+  hostnames:
+    - {{ .Values.host.influx }}
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: ingressgateway
+      namespace: istio-ingress
+  rules:
+    - backendRefs:
+        - group: ''
+          kind: Service
+          name: {{ .Release.Name }}-influxdb
+          port: 8086
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
 ---
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
   name: {{ .Release.Name }}-grafana-vs
   namespace: {{ .Values.namespace }}
 spec:
-  gateways:
-  - {{ .Values.gateway }}
-  hosts:
-  - {{ .Values.host.grafana }}
-  http:
-  - match:
-    - uri:
-        prefix: /
-    route:
-    - destination:
-        host: {{ .Release.Name }}-grafana
-        port:
-          number: 3000
-    retries:
-      attempts: 0
-    timeout: 30s
+  hostnames:
+    - {{ .Values.host.grafana }}
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: ingressgateway
+      namespace: istio-ingress
+  rules:
+    - backendRefs:
+        - group: ''
+          kind: Service
+          name: {{ .Release.Name }}-grafana
+          port: 3000
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
