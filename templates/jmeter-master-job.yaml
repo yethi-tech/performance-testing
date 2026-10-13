@@ -17,12 +17,12 @@ spec:
             app: {{ .Release.Name }}-jmeter-master
 
         spec:
-          hostAliases:
-            - ip: "10.141.218.208"
-              hostnames:
-                - islamic-channels.stgd.dhofarislamic.com
-                - core.stgd.dhofarislamic.com
-                - apihub.stgd.dhofarislamic.com
+          # hostAliases:
+          #   - ip: "10.141.218.208"
+          #     hostnames:
+          #       - islamic-channels.stgd.dhofarislamic.com
+          #       - core.stgd.dhofarislamic.com
+          #       - apihub.stgd.dhofarislamic.com
 
           serviceAccountName: {{ .Release.Name }}-jmeter-master-sa
           restartPolicy: Never

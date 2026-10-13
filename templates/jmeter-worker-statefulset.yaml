@@ -19,12 +19,12 @@ spec:
         app: {{ .Release.Name }}-jmeter-worker
 
     spec:
-      hostAliases:
-        - ip: "10.141.218.208"
-          hostnames:
-            - islamic-channels.stgd.dhofarislamic.com
-            - core.stgd.dhofarislamic.com
-            - apihub.stgd.dhofarislamic.com
+      # hostAliases:
+      #   - ip: "10.141.218.208"
+      #     hostnames:
+      #       - islamic-channels.stgd.dhofarislamic.com
+      #       - core.stgd.dhofarislamic.com
+      #       - apihub.stgd.dhofarislamic.com
 
       initContainers:
         {{- if .Values.extraInitContainers }}
