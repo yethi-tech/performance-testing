@@ -33,7 +33,7 @@ spec:
 
       containers:
         - name: jmeter-worker
-          image: "{{ .Values.Workers.image | default "yethitech/performance-testing" }}:{{ .Values.Workers.imageTag | default "6-3-26" }}"
+          image: "{{ .Values.Workers.image | default "yethitech/performance-testing" }}:{{ .Values.Workers.imageTag | default "30-10-26" }}"
           imagePullPolicy: Always
 
           securityContext:
